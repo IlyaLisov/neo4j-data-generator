@@ -1,0 +1,20 @@
+version: '2'
+
+volumes:
+  db-neo4j-data:
+    driver: local
+
+services:
+  db:
+    image: neo4j:5.8.0-enterprise
+    container_name: neo4j
+    environment:
+      - NEO4J_ACCEPT_LICENSE_AGREEMENT=yes
+    ports:
+      - '7474:7474'
+      - '7687:7687'
+    volumes:
+      - db-neo4j-data:/data
+    mem_limit: 1024m
+    cpuset: 0-1
+
