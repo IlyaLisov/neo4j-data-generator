@@ -23,7 +23,7 @@ public class Neo4jDataGeneratorApplication implements CommandLineRunner {
 
     private final Driver driver = GraphDatabase.driver("bolt://localhost:7687", AuthTokens.basic("neo4j", "12345678"));
 
-    private static final int USERS_AMOUNT = 1000;
+    private static final int USERS_AMOUNT = 10000;
     private static final int FRIENDS_LIST_SIZE = 100;
 
     List<String> names = List.of(
@@ -116,7 +116,8 @@ public class Neo4jDataGeneratorApplication implements CommandLineRunner {
         Result result = session.run(query.toString(), values);
         while (result.hasNext()) {
             Record record = result.next();
-            User user = new User(record.get("id").asLong(), record.get("name").asString());
+            record.get("id");
+            record.get("name");
         }
         long end = System.currentTimeMillis();
         log.info("Retrieve {} {} level join objects in {} s", (int) Math.pow(FRIENDS_LIST_SIZE, level), level, (end - start) / 1000.0);
